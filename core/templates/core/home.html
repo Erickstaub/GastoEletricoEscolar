@@ -1,0 +1,70 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4"> Consumo de Energia Na Escola</h2>
+
+    {% if Ele %}
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-striped table-hover align-middle">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Eletrônico</th>
+                            <th>Categoria</th>
+                            <th>Sala</th>
+                            <th>Qtd</th>
+                            <th>Potência (W)</th>
+                            <th>Horas</th>
+                            <th>Dias</th>
+                            <th>KWh</th>
+                            <th>Custo Mensal</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for e in Ele %}
+                        <tr>
+                            <td><strong>{{ e.nome }}</strong></td>
+                            <td>{{ e.categoria }}</td>
+                            <td>{{ e.sala }}</td>
+                            <td>{{ e.quantidade }}</td>
+                            <td>{{ e.potencia }}</td>
+                            <td>{{ e.horas }}</td>
+                            <td>{{ e.dias }}</td>
+                            <td>{{ e.kwh|floatformat:2 }}</td>
+                            <td class="text-success fw-bold">
+                                R$ {{ e.custo|floatformat:2 }}
+                            </td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info">
+        Nenhum eletrônico cadastrado ainda.
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
