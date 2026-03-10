@@ -1,0 +1,77 @@
+/* Hero do Formulário */
+:root {
+    --brand-pink: #FF0040;
+    --dark-section-bg: #343A4B; /* Fundo cinza escuro do Hero */
+    --card-orange: #FF6600;
+    --card-purple: #9900FF;
+    --card-grey: #E0E0E0;
+    --text-on-dark: #FFFFFF;
+}
+
+.form-hero {
+    background-color: #343a4b;
+    color: white;
+    padding: 60px 10% 80px 10%;
+    border-radius: 0 0 50px 50px;
+    margin-bottom: -40px;
+}
+
+/* Container do Card de Cadastro */
+.form-card {
+    background: white;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    max-width: 600px; /* Formulários ficam melhores mais estreitos */
+    margin: 0 auto 50px auto;
+}
+
+/* Estilizando o formulário do Django (as_p) */
+.form-card p {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-card label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+    font-size: 0.9rem;
+}
+
+/* Inputs, Selects e Textareas */
+.form-card input, 
+.form-card select, 
+.form-card textarea {
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    outline: none;
+    transition: border-color 0.3s;
+    font-size: 1rem;
+}
+
+.form-card input:focus, 
+.form-card select:focus {
+    border-color: var(--brand-pink); /* Usa o rosa/vermelho da sua marca */
+}
+
+/* Botão Salvar Estilizado */
+.btn-save {
+    background-color: var(--brand-pink);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: filter 0.2s;
+    margin-top: 10px;
+}
+
+.btn-save:hover {
+    filter: brightness(1.1);
+}

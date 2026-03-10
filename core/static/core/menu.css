@@ -1,0 +1,121 @@
+/* --- Estilos Gerais (Copie e Cole) --- */
+
+/* Paleta de Cores e Estilos Base */
+:root {
+    --brand-pink: #FF0040;
+    --dark-section-bg: #343A4B; /* Fundo cinza escuro do Hero */
+    --card-orange: #FF6600;
+    --card-purple: #9900FF;
+    --card-grey: #E0E0E0;
+    --text-on-dark: #FFFFFF;
+}
+
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+    font-family: 'sans-serif'; /* Uma fonte limpa */
+}
+
+/* --- Seção Hero (Fundo Preto com Curva) --- */
+.home-hero {
+    background-color: var(--dark-section-bg);
+    color: var(--text-on-dark);
+    padding: 20px 10%; /* Recuo para o texto */
+    position: relative;
+    border-radius: 0 0 50% 50% / 0 0 10% 10%; /* Leve curvatura no fundo */
+}
+
+.home-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0;
+    max-width: 600px;
+}
+
+/* --- Container Geral dos Cards (Puxado para Cima) --- */
+.home-grid-container {
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 0px auto 0 auto; /* O segredo para sobrepor o Hero escuro */
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Três colunas iguais */
+    gap: 30px; /* Espaçamento entre os cards */
+}
+
+/* --- Estilos Gerais dos Cards (Quadrados) --- */
+.home-card {
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Texto no final do card */
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+    text-decoration: none; /* Se os cards forem links */
+}
+
+.home-card:hover {
+    transform: translateY(-5px); /* Efeito suave no hover */
+}
+
+/* Texto dentro dos cards */
+.home-card h5 {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Ícone '+' no canto superior direito */
+.home-card-plus {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+/* --- Estilos Específicos dos Cards --- */
+
+/* 1. Card Grande Vermelho (Simula mescla de 2) */
+.card-master {
+    background-color: var(--brand-pink);
+    grid-row: span 2; /* Faz o card ocupar duas linhas de altura */
+    min-height: 440px; /* Altura de dois cards + gap */
+}
+
+/* Símbolo '→' grande no canto inferior esquerdo */
+.master-arrow-icon {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    border: 2px solid white;
+    color: white;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+/* Texto 'Explore More' ao lado da flecha */
+.card-master h3 {
+    color: white;
+    margin-left: 60px; /* Desloca o texto para a direita da flecha */
+}
+
+
+/* 2. Cards Coloridos Normais */
+.card-orange { background-color: var(--card-orange); min-height: 200px; }
+.card-purple { background-color: var(--card-purple); min-height: 200px; }
+
+/* 3. Cards Cinzas */
+.card-grey {
+    background-color: var(--card-grey);
+    min-height: 200px;
+}
+.card-grey h5 {
+    color: #666; /* Texto escuro no fundo cinza */
+}

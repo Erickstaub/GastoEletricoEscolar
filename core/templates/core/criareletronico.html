@@ -1,16 +1,29 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
-{% block title %}Criar Eletronico{% endblock %}
-
+{% block title %}Criar Eletrônico{% endblock %}
+ {% block extra_css %}   
+  <link rel="stylesheet" href="{% static 'core/CE.css' %}">
+ {% endblock %}
 {% block content %}
-<div>
+<section class="form-hero text-center">
+    <h1 style="margin:0;">Novo Eletrônico</h1>
+    <p style="opacity: 0.8;">Preencha os dados para o cálculo de consumo</p>
+</section>
+
+<div class="form-card">
     <form method="POST">
         {% csrf_token %}
+        
         {{ form.as_p }}
-        <button type="submit">Salvar</button>
+        
+        <button type="submit" class="btn-save">
+            Confirmar e Salvar
+        </button>
     </form>
-   
+    
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/" style="color: #999; text-decoration: none; font-size: 0.9rem;">Cancelar e voltar</a>
+    </div>
 </div>
-
-
 {% endblock %}

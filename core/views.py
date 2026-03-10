@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from core.models import Eletronicos,Categorias,Salas
@@ -62,3 +63,23 @@ def CriarSala(request):
 
 
     return render(request, 'core/criarsala.html',{"form": form})
+
+
+
+
+def Menu(request):
+    return render(request, 'core/menu.html')
+def De(request, id):
+    eletronico = get_object_or_404(Eletronicos, id=id)
+    eletronico.delete()
+    return redirect('menu')
+
+def Cadastro(request):
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save() # Cria o usuário no banco automaticamente
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/cadastro.html', {'form': form})

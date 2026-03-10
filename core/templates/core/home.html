@@ -1,70 +1,113 @@
 {% extends 'core/base.html' %}
+{% load static %}
 
-{% block title %}Home{% endblock %}
-
+{% block title %}Consumo de Energia{% endblock %}
+ {% block extra_css %}   
+  <link rel="stylesheet" href="{% static 'core/home.css' %}">
+ {% endblock %}
 {% block content %}
+<section class="table-hero">
+    <h1 style="margin:0; font-size: 2.5rem;">Gestão de Consumo</h1>
+    <p style="opacity: 0.8;">Relatório detalhado de eletrônicos e gastos mensais</p>
+</section>
 
-<div class="container mt-4">
-
-    <h2 class="mb-4"> Consumo de Energia Na Escola</h2>
+<div class="table-container-card">
+    <h2 style="margin-bottom: 25px; color: #333;">Eletrônicos na Escola</h2>
 
     {% if Ele %}
-    <div class="card shadow-sm">
-        <div class="card-body">
-
-            <div class="table-responsive">
-
-                <table class="table table-striped table-hover align-middle">
-
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Eletrônico</th>
-                            <th>Categoria</th>
-                            <th>Sala</th>
-                            <th>Qtd</th>
-                            <th>Potência (W)</th>
-                            <th>Horas</th>
-                            <th>Dias</th>
-                            <th>KWh</th>
-                            <th>Custo Mensal</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        {% for e in Ele %}
-                        <tr>
-                            <td><strong>{{ e.nome }}</strong></td>
-                            <td>{{ e.categoria }}</td>
-                            <td>{{ e.sala }}</td>
-                            <td>{{ e.quantidade }}</td>
-                            <td>{{ e.potencia }}</td>
-                            <td>{{ e.horas }}</td>
-                            <td>{{ e.dias }}</td>
-                            <td>{{ e.kwh|floatformat:2 }}</td>
-                            <td class="text-success fw-bold">
-                                R$ {{ e.custo|floatformat:2 }}
-                            </td>
-                        </tr>
-                        {% endfor %}
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </div>
+    <div style="overflow-x: auto;">
+        <table class="custom-table">
+           <thead class="table-dark">
+    <tr>
+        <th onclick="sortTable(0)" style="cursor:pointer">Eletrônico ↕</th>
+        <th onclick="sortTable(1)" style="cursor:pointer">Categoria ↕</th>
+        <th onclick="sortTable(2)" style="cursor:pointer">Sala ↕</th>
+        <th onclick="sortTable(3)" style="cursor:pointer">Qtd ↕</th>
+        <th onclick="sortTable(4)" style="cursor:pointer">Potência ↕</th>
+        <th onclick="sortTable(5)" style="cursor:pointer">Uso ↕</th>
+        <th onclick="sortTable(6)" style="cursor:pointer">KWh ↕</th>
+        <th onclick="sortTable(7)" style="cursor:pointer">Custo Mensal ↕</th>
+        {% if user.is_superuser %}
+        <th>Acoes</th>
+        {% endif%}
+    </tr>
+</thead>
+            <tbody>
+                {% for e in Ele %}
+                <tr>
+                    <td><strong style="color: var(--brand-pink);">{{ e.nome }}</strong></td>
+                    <td><span class="badge-ui">{{ e.categoria }}</span></td>
+                    <td><span class="badge-ui">{{ e.sala }}</span></td>
+                    <td>{{ e.quantidade }}</td>
+                    <td>{{ e.potencia }}W</td>
+                    <td>{{ e.horas }}h / {{ e.dias }}d</td>
+                    <td>{{ e.kwh|floatformat:2 }}</td>
+                    <td>
+                        <span class="price-tag">R$ {{ e.custo|floatformat:2 }}</span>
+                    </td>
+                    {% if user.is_superuser %}
+                    <td><a href="{% url 'deletarE' e.id %}" class="btn-delete">Excluir</a></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
     {% else %}
-
-    <div class="alert alert-info">
-        Nenhum eletrônico cadastrado ainda.
+    <div style="padding: 40px; text-align: center; color: #999;">
+        <p>Nenhum eletrônico cadastrado ainda.</p>
+        <a href="{% url 'CE' %}" style="color: var(--brand-pink); text-decoration: none; font-weight: bold;">+ Cadastrar Primeiro</a>
     </div>
-
     {% endif %}
-
 </div>
 
+<script>
+function sortTable(n) {
+  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+  table = document.querySelector(".custom-table");
+  switching = true;
+  dir = "asc"; 
+  
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[n];
+      y = rows[i + 1].getElementsByTagName("TD")[n];
+      
+      // Limpa caracteres especiais para comparar números (R$, W, etc)
+      var xValue = x.innerText.replace(/[^\d,.-]/g, '').replace(',', '.');
+      var yValue = y.innerText.replace(/[^\d,.-]/g, '').replace(',', '.');
+      
+      // Se não for número, usa o texto puro
+      var cmpX = isNaN(parseFloat(xValue)) ? x.innerText.toLowerCase() : parseFloat(xValue);
+      var cmpY = isNaN(parseFloat(yValue)) ? y.innerText.toLowerCase() : parseFloat(yValue);
+
+      if (dir == "asc") {
+        if (cmpX > cmpY) {
+          shouldSwitch = true;
+          break;
+        }
+      } else if (dir == "desc") {
+        if (cmpX < cmpY) {
+          shouldSwitch = true;
+          break;
+        }
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+      switchcount ++;      
+    } else {
+      if (switchcount == 0 && dir == "asc") {
+        dir = "desc";
+        switching = true;
+      }
+    }
+  }
+}
+</script>
 {% endblock %}

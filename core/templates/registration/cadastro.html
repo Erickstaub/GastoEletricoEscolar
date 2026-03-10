@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gestão de Salas</title>
+    <title>Cadastro - Gestão de Salas</title>
     <style>
-        /* --- CSS PURA (Vanilla) --- */
         :root {
             --brand-pink: #FF0040;
             --dark-bg: #343A4B;
@@ -20,38 +19,38 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh; /* Centraliza verticalmente na tela toda */
+            min-height: 100vh; /* min-height para permitir scroll se o form for longo */
+            padding: 20px 0;
         }
 
-        /* Container do Card */
-        .login-card {
+        .register-card {
             background: white;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             padding: 40px;
             border-radius: 30px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .register-card h2 {
+            color: var(--dark-bg);
+            margin: 0 0 10px 0;
+            font-size: 2rem;
             text-align: center;
         }
 
-        .login-card h2 {
-            color: var(--dark-bg);
-            margin-bottom: 10px;
-            font-size: 2rem;
-        }
-
-        .login-card p {
+        .register-card p.subtitle {
             color: #888;
             margin-bottom: 30px;
             font-size: 0.9rem;
+            text-align: center;
         }
 
-        /* Estilização do Form Django (as_p) */
+        /* Ajuste do Form Django as_p */
         form p {
-            text-align: left;
             display: flex;
             flex-direction: column;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         label {
@@ -62,9 +61,9 @@
         }
 
         input {
-            padding: 14px 18px;
+            padding: 12px 16px;
             border: 2px solid #edeff2;
-            border-radius: 15px;
+            border-radius: 12px;
             font-size: 1rem;
             outline: none;
             transition: all 0.3s;
@@ -77,8 +76,24 @@
             box-shadow: 0 0 0 4px rgba(255, 0, 64, 0.1);
         }
 
-        /* Botão Entrar */
-        .btn-login {
+        /* Estilo para as dicas de senha do Django (helptext) */
+        .helptext {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 5px;
+            line-height: 1.3;
+        }
+
+        ul.errorlist {
+            padding: 0;
+            margin: 0 0 15px 0;
+            list-style: none;
+            color: var(--brand-pink);
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .btn-register {
             background-color: var(--brand-pink);
             color: white;
             border: none;
@@ -92,13 +107,14 @@
             margin-top: 10px;
         }
 
-        .btn-login:hover {
+        .btn-register:hover {
             filter: brightness(1.1);
             transform: translateY(-2px);
         }
 
         .footer-links {
             margin-top: 25px;
+            text-align: center;
             font-size: 0.85rem;
         }
 
@@ -111,22 +127,22 @@
 </head>
 <body>
 
-    <div class="login-card">
-        <h2>Login</h2>
-        <p>Bem-vindo de volta! Faça login para continuar.</p>
+    <div class="register-card">
+        <h2>Criar Conta</h2>
+        <p class="subtitle">Cadastre-se para gerenciar o consumo de energia.</p>
 
         <form method="post">
             {% csrf_token %}
             
-            <div class="django-form-wrapper">
-                {{ form.as_p }}
-            </div>
+            {{ form.as_p }}
 
-            <button type="submit" class="btn-login">Entrar</button>
+            <button type="submit" class="btn-register">Finalizar Cadastro</button>
         </form>
 
         <div class="footer-links">
-            <a href="/cadastro">Criar uma conta</a>
+            Já tem uma conta? <a href="{% url 'login' %}">Faça login</a>
+            <br><br>
+           
         </div>
     </div>
 

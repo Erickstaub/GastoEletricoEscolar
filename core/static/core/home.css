@@ -1,0 +1,68 @@
+/* Reutilizando o padrão do Hero */
+.table-hero {
+    background-color: #343a4b;
+    color: white;
+    padding: 60px 10% 100px 10%;
+    border-radius: 0 0 50px 50px;
+    margin-bottom: -60px;
+}
+
+/* Card Branco Arredondado para a Tabela */
+.table-container-card {
+    background: white;
+    border-radius: 30px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    overflow: hidden;
+}
+
+/* Estilização da Tabela Pura */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.custom-table thead {
+    border-bottom: 2px solid #eee;
+}
+
+.custom-table th {
+    text-align: left;
+    padding: 15px;
+    color: #888;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.custom-table td {
+    padding: 20px 15px;
+    border-bottom: 1px solid #f4f4f4;
+    color: #444;
+}
+
+.custom-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Destaque para o Custo */
+.price-tag {
+    color: #27ae60;
+    font-weight: bold;
+    background: #e8f5e9;
+    padding: 5px 12px;
+    border-radius: 50px;
+    display: inline-block;
+}
+
+/* Badge para Categoria/Sala */
+.badge-ui {
+    background: #eee;
+    padding: 4px 10px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #666;
+}
