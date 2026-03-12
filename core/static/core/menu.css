@@ -1,9 +1,35 @@
-/* --- Estilos Gerais (Copie e Cole) --- */
+/* --- Estilos Gerais (Seu código com suporte a imagem) --- */
+/* --- Definição da Animação --- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-/* Paleta de Cores e Estilos Base */
+/* --- Classe para aplicar nos itens --- */
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Começa invisível até a animação rodar */
+}
+
+/* --- Delay (Atraso) para os cards aparecerem um após o outro --- */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+/* Ajuste no hover que você já tinha (melhorando a suavidade) */
+.home-card {
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+}
 :root {
     --brand-pink: #FF0040;
-    --dark-section-bg: #343A4B; /* Fundo cinza escuro do Hero */
+    --dark-section-bg: #343A4B;
     --card-orange: #FF6600;
     --card-purple: #9900FF;
     --card-grey: #E0E0E0;
@@ -13,16 +39,15 @@
 body {
     background-color: #f8f9fa;
     margin: 0;
-    font-family: 'sans-serif'; /* Uma fonte limpa */
+    font-family: 'sans-serif';
 }
 
-/* --- Seção Hero (Fundo Preto com Curva) --- */
 .home-hero {
     background-color: var(--dark-section-bg);
     color: var(--text-on-dark);
-    padding: 20px 10%; /* Recuo para o texto */
+    padding: 20px 10%;
     position: relative;
-    border-radius: 0 0 50% 50% / 0 0 10% 10%; /* Leve curvatura no fundo */
+    border-radius: 0 0 50% 50% / 0 0 10% 10%;
 }
 
 .home-hero h1 {
@@ -33,34 +58,55 @@ body {
     max-width: 600px;
 }
 
-/* --- Container Geral dos Cards (Puxado para Cima) --- */
 .home-grid-container {
-    max-width: 1200px; /* Largura máxima do conteúdo */
-    margin: 0px auto 0 auto; /* O segredo para sobrepor o Hero escuro */
+    max-width: 1200px;
+    margin: 0px auto 0 auto;
     padding: 0 20px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Três colunas iguais */
-    gap: 30px; /* Espaçamento entre os cards */
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
 }
 
-/* --- Estilos Gerais dos Cards (Quadrados) --- */
 .home-card {
     border-radius: 20px;
     padding: 30px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Texto no final do card */
+    justify-content: flex-end;
     position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-    text-decoration: none; /* Se os cards forem links */
+    overflow: hidden; 
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Adicionado box-shadow aqui */
+    text-decoration: none;
+    cursor: pointer; /* Garante a mãozinha do mouse */
 }
+
+/* --- O HOVER ADICIONADO --- */
+.home-card:hover {
+    transform: translateY(-15px); /* Faz o card subir */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra para destacar a elevação */
+}
+
+/* --- Restante do seu código original abaixo --- */
+.home-card img.card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1; 
+}
+/* Garante que o texto fique na frente da imagem */
+.home-card h5, .home-card h3, .home-card-plus, .master-arrow-icon {
+    position: relative;
+    z-index: 2; /* Texto na frente */
+}
+/* ------------------------------------------- */
 
 .home-card:hover {
-    transform: translateY(-5px); /* Efeito suave no hover */
+    transform: translateY(-5px);
 }
 
-/* Texto dentro dos cards */
 .home-card h5 {
     color: white;
     font-weight: 600;
@@ -68,23 +114,18 @@ body {
     font-size: 1.1rem;
 }
 
-/* Ícone '+' no canto superior direito */
 .home-card-plus {
     position: absolute;
     top: 20px;
     right: 20px;
 }
 
-/* --- Estilos Específicos dos Cards --- */
-
-/* 1. Card Grande Vermelho (Simula mescla de 2) */
 .card-master {
     background-color: var(--brand-pink);
-    grid-row: span 2; /* Faz o card ocupar duas linhas de altura */
-    min-height: 440px; /* Altura de dois cards + gap */
+    grid-row: span 2;
+    min-height: 440px;
 }
 
-/* Símbolo '→' grande no canto inferior esquerdo */
 .master-arrow-icon {
     position: absolute;
     bottom: 25px;
@@ -100,22 +141,18 @@ body {
     font-size: 1.5rem;
 }
 
-/* Texto 'Explore More' ao lado da flecha */
 .card-master h3 {
     color: white;
-    margin-left: 60px; /* Desloca o texto para a direita da flecha */
+    margin-left: 60px;
 }
 
-
-/* 2. Cards Coloridos Normais */
 .card-orange { background-color: var(--card-orange); min-height: 200px; }
 .card-purple { background-color: var(--card-purple); min-height: 200px; }
 
-/* 3. Cards Cinzas */
 .card-grey {
     background-color: var(--card-grey);
     min-height: 200px;
 }
 .card-grey h5 {
-    color: #666; /* Texto escuro no fundo cinza */
+    color: #666;
 }

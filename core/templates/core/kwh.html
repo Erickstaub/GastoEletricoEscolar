@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Entenda o Consumo{% endblock %}
+ {% block extra_css %}   
+  <link rel="stylesheet" href="{% static 'core/kwh.css' %}">
+ {% endblock %}
+
+{% block content %}
+<section class="form-hero text-center animate-in">
+    <h1 style="margin:0; font-size: 2.5rem;">Entenda os Cálculos</h1>
+    <p style="opacity: 0.8;">Saiba como transformamos Watts em Dinheiro no seu relatório</p>
+</section>
+
+<div class="info-container">
+    
+    <div class="info-card animate-in delay-1">
+        <div class="info-icon">⚡</div>
+        <div class="info-text">
+            <h2>O que é o kWh?</h2>
+            <p>O <strong>Quilowatt-hora (kWh)</strong> é a unidade que mede a energia consumida. Não confunda com a potência! Enquanto a potência é a "força" do aparelho, o kWh é essa força multiplicada pelo tempo que ele fica ligado.</p>
+            <div class="formula">
+                Formula: (Watts × Horas × Dias) ÷ 1000 = kWh
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-2">
+        <div class="info-icon">🔌</div>
+        <div class="info-text">
+            <h2>Potência (Watts)</h2>
+            <p>É a capacidade de trabalho de um equipamento. Um ar-condicionado tem muita potência (ex: 2000W), enquanto uma lâmpada LED tem pouca (ex: 9W). Quanto maior a potência, mais rápido o medidor de energia gira.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-3">
+        <div class="info-icon">💰</div>
+        <div class="info-text">
+            <h2>Como calculamos o R$?</h2>
+            <p>Pegamos o total de kWh consumido no mês e multiplicamos pela tarifa da distribuidora (em Santa Cruz usamos <strong>R$ 0,92</strong>)</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;" class="animate-in delay-4">
+        <a href="{% url 'menu' %}" class="btn-voltar">Voltar ao menu</a>
+    </div>
+</div>
+{% endblock %}

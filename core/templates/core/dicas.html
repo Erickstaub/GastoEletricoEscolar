@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Dicas de Economia{% endblock %}
+ {% block extra_css %}   
+  <link rel="stylesheet" href="{% static 'core/kwh.css' %}">
+ {% endblock %}
+{% block content %}
+<section class="form-hero text-center animate-in">
+    <h1 style="margin:0;">Economia Inteligente</h1>
+    <p style="opacity: 0.8;">Pequenas mudanças, grandes reduções na fatura</p>
+</section>
+
+<div class="info-container">
+    <div class="info-card animate-in delay-1">
+        <div class="info-icon">💡</div>
+        <div class="info-text">
+            <h2>Iluminação Eficiente</h2>
+            <p>Substitua lâmpadas fluorescentes por LED. Uma lâmpada LED consome até 80% menos energia e dura 3x mais, reduzindo o custo de manutenção nas salas.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-2">
+        <div class="info-icon">❄️</div>
+        <div class="info-text">
+            <h2>Uso do Ar-Condicionado</h2>
+            <p>Mantenha os filtros limpos e as portas fechadas. Cada grau abaixo dos 23°C aumenta o consumo em cerca de 7%. Em Santa Cruz, use o modo "Dry" em dias úmidos para maior conforto com menos gasto.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-3">
+        <div class="info-icon">🔌</div>
+        <div class="info-text">
+            <h2>Consumo Fantasma (Stand-by)</h2>
+            <p>Aparelhos como TVs, projetores e computadores consomem energia mesmo "desligados" se estiverem na tomada. Desconecte os equipamentos que não serão usados no final de semana.</p>
+        </div>
+    </div>
+    
+    <div class="info-card animate-in delay-4">
+        <div class="info-icon">🏫</div>
+        <div class="info-text">
+            <h2>Gestão de Ambientes</h2>
+            <p>Salas de aula que ficam vazias em períodos específicos (como o recreio ou aulas de educação física) devem ter luzes e aparelhos desligados. Criar o hábito de um "monitor de energia" por turma ajuda a reduzir o desperdício em até 15%.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.5s;">
+        <div class="info-icon">🔧</div>
+        <div class="info-text">
+            <h2>Manutenção de Equipamentos</h2>
+            <p>Computadores com fontes antigas ou poeira acumulada trabalham "no sacrifício", esquentam mais e consomem mais energia. Uma limpeza semestral nos laboratórios de informática garante melhor performance e economia.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.6s;">
+        <div class="info-icon">💧</div>
+        <div class="info-text">
+            <h2>Bebedouros e Refrigeração</h2>
+            <p>Bebedouros de coluna consomem energia 24h por dia para manter a água gelada. Ajustar o termostato para uma temperatura média e verificar as borrachas de vedação evita que o motor trabalhe sem necessidade durante a noite.</p>
+        </div>
+    </div>
+    
+    <div class="info-card animate-in" style="animation-delay: 0.7s;">
+        <div class="info-icon">💻</div>
+        <div class="info-text">
+            <h2>Gestão de Energia nos PCs</h2>
+            <p>Configure os computadores do laboratório para entrar em modo de suspensão após 10 minutos de inatividade. </p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.8s;">
+        <div class="info-icon">🎨</div>
+        <div class="info-text">
+            <h2>Pintura e Reflexão</h2>
+            <p>Paredes e tetos pintados com cores claras refletem melhor a luz natural. Isso permite que as lâmpadas sejam acesas mais tarde no final da tarde, aproveitando ao máximo a iluminação do sol que entra pelas janelas.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.9s;">
+        <div class="info-icon">🚶</div>
+        <div class="info-text">
+            <h2>Automação em Áreas Comuns</h2>
+            <p>Instalar sensores de presença em corredores, banheiros e depósitos garante que a luz só consuma energia quando houver alguém no local. É um investimento que se paga em poucos meses de economia na conta da RGE.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;" class="animate-in" style="animation-delay: 1s;">
+        <a href="{% url 'menu' %}" class="btn-voltar">Voltar ao menu</a>
+    </div>
+</div>
+{% endblock %}

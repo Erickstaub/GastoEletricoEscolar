@@ -1,4 +1,32 @@
 /* Reutilizando o padrão do Hero */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Classe para aplicar nos itens --- */
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Começa invisível até a animação rodar */
+}
+
+/* --- Delay (Atraso) para os cards aparecerem um após o outro --- */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+.logo{
+    width: 30px;
+}
+
+
 .table-hero {
     background-color: #343a4b;
     color: white;
@@ -65,4 +93,35 @@
     border-radius: 8px;
     font-size: 0.85rem;
     color: #666;
+}
+/* Estilização do Botão de Adicionar */
+.btn-floating {
+    background-color: #666;
+    color: white;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: none;
+    font-size: 2rem;
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px #666;
+    transition: transform 0.2s ease-in-out, background-color 0.2s;
+    
+    /* Posicionamento opcional: fixo no canto da tela ou no card */
+    margin: 20px auto 0 auto; 
+}
+
+.btn-floating:hover {
+    transform: translateY(-5px) scale(1.1); /* Sobe e cresce um pouco */
+    background-color: #e60039; /* Um tom de rosa levemente mais escuro */
+}
+
+.btn-floating:active {
+    transform: scale(0.95);
 }

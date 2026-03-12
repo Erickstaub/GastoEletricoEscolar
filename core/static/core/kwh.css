@@ -1,0 +1,105 @@
+/* Container Centralizado */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- Classe para aplicar nos itens --- */
+.animate-in {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0; /* Começa invisível até a animação rodar */
+}
+
+/* --- Delay (Atraso) para os cards aparecerem um após o outro --- */
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }
+
+.info-container {
+    max-width: 900px;
+    margin: 0 auto 60px auto;
+    padding: 20px;
+}
+
+/* Estilo dos Cards de Informação */
+.info-card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: flex-start;
+    gap: 25px;
+    transition: transform 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+}
+
+.info-icon {
+    font-size: 2.5rem;
+    background: #f0f2f5;
+    padding: 20px;
+    border-radius: 20px;
+    line-height: 1;
+}
+
+.info-text h2 {
+    margin-top: 0;
+    color: #343a4b;
+    font-size: 1.5rem;
+}
+
+.info-text p {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Destaque para a Fórmula */
+.formula {
+    background: #fff5f7;
+    color: #FF0040;
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    margin-top: 15px;
+    border: 1px dashed #FF0040;
+}
+
+/* Botão de Voltar */
+.btn-voltar {
+    display: inline-block;
+    background: #343a4b;
+    color: white;
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-voltar:hover {
+    background: #FF0040;
+}
+
+/* Responsividade para Celular */
+@media (max-width: 600px) {
+    .info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    .info-icon {
+        margin: 0 auto;
+    }
+}

@@ -1,46 +1,48 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% block title %}Menu{% endblock %}
 {% block extra_css %}
  <link rel="stylesheet" href="{% static 'core/menu.css' %}">
 {% endblock %}
 {% block content %}
-<section class="home-hero">
-    <h1>Innovative Solutions <br> for Your Business</h1>
+<section class="home-hero animate-in">
+    <h1>Aprenda Sobre <br> Consumo Energetico</h1>
 </section>
 
 <div class="home-grid-container">
     
-    <div class="home-card card-master">
+    <div class="home-card card-master animate-in delay-1" onclick="window.location.href='{% url 'home' %}'">
         <div class="master-arrow-icon">→</div>
-        <h3>Explore More</h3>
+        <h3>Tabela De Gastos</h3>
     </div>
 
-    <div class="home-card card-orange">
+    <div class="home-card card-orange animate-in delay-2" onclick="window.location.href='{% url 'kwh' %}'">
         <div class="home-card-plus">
             <img src="https://img.icons8.com/material-outlined/24/ffffff/plus-math.png" alt="plus"/>
         </div>
-        <h5>Add Feature</h5>
+        <img src="https://www.weg.net/solar/blog/wp-content/uploads/2023/03/qual-a-diferenca-entre-kw-kwh-e-kwp_-1.png" class="card-bg">
+        <h5>Entenda os calculos</h5>
     </div>
 
-    <div class="home-card card-grey">
+    <div class="home-card card-grey animate-in delay-3" onclick="window.location.href='{% url 'dicas' %}'">
         <div class="home-card-plus">
             <img src="https://img.icons8.com/material-outlined/24/ff0040/plus-math.png" alt="plus"/>
         </div>
-        <h5>Add Feature</h5>
+        <h5>Dicas</h5>
     </div>
 
-    <div class="home-card card-grey">
+    <div class="home-card card-grey animate-in delay-4">
         <div class="home-card-plus">
             <img src="https://img.icons8.com/material-outlined/24/9900ff/plus-math.png" alt="plus"/>
         </div>
-        <h5>Add Feature</h5>
+        <h5>ESPACO LIVRE</h5>
     </div>
 
-    <div class="home-card card-purple">
+    <div class="home-card card-purple animate-in delay-5" onclick="window.location.href='{% url 'ST' %}'">
         <div class="home-card-plus">
             <img src="https://img.icons8.com/material-outlined/24/ffffff/plus-math.png" alt="plus"/>
         </div>
-        <h5>Add Feature</h5>
+        <h5>Sua Tabela</h5>
     </div>
 
 </div>
