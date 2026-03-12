@@ -24,10 +24,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-p&=l1*i)d-m2wi+(0jr)7v=f^vd7%w&aqib)#w2#s(nhi+*hm_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+ON_PYTHONANYWHERE = 'PYTHONANYWHERE_DOMAIN' in os.environ
 
-ALLOWED_HOSTS = []
-
+if ON_PYTHONANYWHERE:
+    DEBUG = False
+    ALLOWED_HOSTS = ['erickstaub.pythonanywhere.com']
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+else:
+    DEBUG = True
+    ALLOWED_HOSTS = []
+    # No seu PC, ele usa o static normal dentro dos apps
 
 # Application definition
 
@@ -117,6 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "login"
