@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ambientes Virtuais (Venv)
+venv/
+.venv/
+env/
+minha-env/
+bin/
+lib/
+
+# Banco de Dados Local (IMPORTANTE)
+# Isso evita que os testes do seu PC sobrescrevam os dados do servidor
+db.sqlite3
+
+# Arquivos de Sistema
+.DS_Store
+Thumbs.db
+
+# Arquivos Estáticos reunidos (Coletados pelo collectstatic)
+static/
+
+# Configurações do VS Code ou IDEs
+.vscode/
+.idea/
