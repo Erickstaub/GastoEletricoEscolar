@@ -10,13 +10,11 @@
     }
 }
 
-/* --- Classe para aplicar nos itens --- */
 .animate-in {
     animation: fadeInUp 0.6s ease-out forwards;
-    opacity: 0; /* Começa invisível até a animação rodar */
+    opacity: 0;
 }
 
-/* --- Delay (Atraso) para os cards aparecerem um após o outro --- */
 .delay-1 { animation-delay: 0.1s; }
 .delay-2 { animation-delay: 0.2s; }
 .delay-3 { animation-delay: 0.3s; }
@@ -26,7 +24,6 @@
     width: 30px;
 }
 
-
 .table-hero {
     background-color: #343a4b;
     color: white;
@@ -35,33 +32,41 @@
     margin-bottom: -60px;
 }
 
-/* Card Branco Arredondado para a Tabela */
+/* --- AJUSTE AQUI: Card com overflow hidden --- */
 .table-container-card {
     background: white;
-    border-radius: 30px;
-    padding: 30px;
+    border-radius: 30px; /* Borda bem arredondada como você gosta */
+    padding: 0;          /* Tirei o padding para a tabela encostar nas bordas e ser "cortada" */
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
     max-width: 1200px;
     margin: 0 auto 50px auto;
-    overflow: hidden;
+    overflow: hidden;    /* ISSO AQUI corta os cantos quadrados da tabela */
+    border: 1px solid #eee;
 }
 
-/* Estilização da Tabela Pura */
+/* Padding interno apenas no header do card (onde fica o título e total) */
+.table-container-card > div:first-child {
+    padding: 30px 30px 10px 30px;
+}
+
+/* Estilização da Tabela */
 .custom-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 10px;
+    margin-top: 0;
+    border: none; /* Remove borda externa da tabela */
 }
 
 .custom-table thead {
+    background-color: #fcfcfc; /* Um fundo leve para o cabeçalho */
     border-bottom: 2px solid #eee;
 }
 
 .custom-table th {
     text-align: left;
-    padding: 15px;
+    padding: 20px 15px; /* Aumentei um pouco o respiro */
     color: #888;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -70,6 +75,11 @@
     padding: 20px 15px;
     border-bottom: 1px solid #f4f4f4;
     color: #444;
+}
+
+/* Remove a borda da última linha para não ficar estranho no fundo redondo */
+.custom-table tr:last-child td {
+    border-bottom: none;
 }
 
 .custom-table tr:hover {
@@ -86,7 +96,6 @@
     display: inline-block;
 }
 
-/* Badge para Categoria/Sala */
 .badge-ui {
     background: #eee;
     padding: 4px 10px;
@@ -94,7 +103,8 @@
     font-size: 0.85rem;
     color: #666;
 }
-/* Estilização do Botão de Adicionar */
+
+/* Botão Flutuante */
 .btn-floating {
     background-color: #666;
     color: white;
@@ -106,22 +116,16 @@
     position: fixed;
     right: 40px;
     bottom: 40px;
-
+    display: flex; /* Adicionei flex para centralizar o "+" */
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 15px #666;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     transition: transform 0.2s ease-in-out, background-color 0.2s;
-    
-    /* Posicionamento opcional: fixo no canto da tela ou no card */
-    margin: 20px auto 0 auto; 
+    z-index: 1000;
 }
 
 .btn-floating:hover {
-    transform: translateY(-5px) scale(1.1); /* Sobe e cresce um pouco */
-    background-color: #e60039; /* Um tom de rosa levemente mais escuro */
-}
-
-.btn-floating:active {
-    transform: scale(0.95);
+    transform: translateY(-5px) scale(1.1);
+    background-color: #ff0040; /* Rosa padrão do seu site */
 }

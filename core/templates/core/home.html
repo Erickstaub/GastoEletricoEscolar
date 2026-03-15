@@ -2,9 +2,112 @@
 {% load static %}
 
 {% block title %}Consumo de Energia{% endblock %}
- {% block extra_css %}   
-  <link rel="stylesheet" href="{% static 'core/home.css' %}">
- {% endblock %}
+{% block extra_css %}   
+<link rel="stylesheet" href="{% static 'core/home.css' %}">
+<style>
+/* --- AJUSTES DE ENCAIXE DA TABELA --- */
+.table-container-card {
+    background: white;
+    border-radius: 15px;
+    padding: 0; /* Removido para a tabela encostar nas bordas arredondadas */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    overflow: hidden; /* Corta os cantos da tabela seguindo os 30px */
+    border: 1px solid #eee;
+}
+
+/* Div interna para o título e botão terem respiro (já que a div pai está com padding 0) */
+.table-header-row {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 30px 30px 10px 30px; /* O respiro volta aqui */
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+}
+
+.custom-table tr:last-child td {
+    border-bottom: none; /* Evita linha reta no fundo arredondado */
+}
+
+@media print {
+    /* 1. Força o navegador a imprimir cores e imagens de fundo */
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    /* 2. Limpeza de interface */
+    nav, footer, header, .btn-delete, button, .table-hero, .no-print, .master-arrow-icon {
+        display: none !important;
+    }
+
+    @page {
+        margin: 2cm;
+    }
+
+    /* 3. Estilização da Tabela no Papel */
+    .table-container-card {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .custom-table {
+        width: 100% !important;
+        border-collapse: separate !important; /* Permite bordas arredondadas no PDF */
+        border-spacing: 0;
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 0px !important;
+        overflow: hidden;
+    }
+
+    /* Cabeçalho mais elegante */
+    .table-dark th {
+        background-color: #f8f9fa !important;
+        color: #333 !important;
+        border-bottom: 2px solid #000000 !important; /* Linha rosa pra dar o estilo do site */
+        padding: 15px 10px !important;
+        font-size: 10pt !important;
+        text-transform: uppercase;
+    }
+
+    /* Células com mais espaço */
+    .custom-table td {
+        padding: 12px 10px !important;
+        border-bottom: 1px solid #eee !important;
+        font-size: 11pt !important;
+        vertical-align: middle;
+    }
+
+    /* Cores que você queria manter */
+    .price-tag {
+        color: #27ae60 !important;
+        font-weight: bold !important;
+        background-color: #f0fff4 !important; /* Fundo verdinho no custo */
+        padding: 4px 8px !important;
+        border-radius: 0px !important;
+    }
+
+    strong { color: #000000 !important; } /* Nome do eletrônico em rosa */
+
+    /* Remove coluna de ações */
+    th:last-child, td:last-child {
+        display: none !important;
+    }
+}
+</style>
+{% endblock %}
+
 {% block content %}
 <section class="table-hero animate-in">
     <h1 style="margin:0; font-size: 2.5rem;">Gestão de Consumo</h1>
@@ -12,34 +115,41 @@
 </section>
 
 <div class="table-container-card animate-in delay-1">
-       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; flex-wrap: wrap; gap: 10px;">
+    <div class="table-header-row">
         <h2 style="margin: 0; color: #333;">Eletrônicos na escola</h2>
         
-        {% if Ele %}
-        <div style="background: var(--brand-pink); color: black; padding: 8px 18px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px rgba(255, 0, 64, 0.2); font-size: 1.1rem;">
-            Total: R$ {{ total_custo|floatformat:2 }}
+        <div style="display: flex; gap: 10px;">
+            <button onclick="window.print()" class="no-print" style="background: #2d2d3a; color: white; border: none; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <img src="https://img.icons8.com/material-outlined/20/ffffff/print.png"/>
+                Imprimir 
+            </button>
+            
+            {% if Ele %}
+            <div style="background: var(--brand-pink); color: black; padding: 8px 18px; border-radius: 50px; font-weight: bold; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); font-size: 1.1rem;">
+                Total: R$ {{ total_custo|floatformat:2 }}
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
 
     {% if Ele %}
     <div style="overflow-x: auto;">
         <table class="custom-table">
-           <thead class="table-dark">
-    <tr>
-        <th onclick="sortTable(0)" style="cursor:pointer">Eletrônico ↕</th>
-        <th onclick="sortTable(1)" style="cursor:pointer">Categoria ↕</th>
-        <th onclick="sortTable(2)" style="cursor:pointer">Sala ↕</th>
-        <th onclick="sortTable(3)" style="cursor:pointer">Qtd ↕</th>
-        <th onclick="sortTable(4)" style="cursor:pointer">Potência ↕</th>
-        <th onclick="sortTable(5)" style="cursor:pointer">Uso ↕</th>
-        <th onclick="sortTable(6)" style="cursor:pointer">KWh ↕</th>
-        <th onclick="sortTable(7)" style="cursor:pointer">Custo Mensal ↕</th>
-        {% if user.is_superuser %}
-        <th>Ações</th>
-        {% endif%}
-    </tr>
-</thead>
+            <thead class="table-dark">
+                <tr>
+                    <th onclick="sortTable(0)" style="cursor:pointer">Eletrônico <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(1)" style="cursor:pointer">Categoria <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(2)" style="cursor:pointer">Sala <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(3)" style="cursor:pointer">Qtd <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(4)" style="cursor:pointer">Potência <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(5)" style="cursor:pointer">Uso <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(6)" style="cursor:pointer">KWh <span class="no-print">↕</span></th>
+                    <th onclick="sortTable(7)" style="cursor:pointer">Custo Mensal <span class="no-print">↕</span></th>
+                    {% if user.is_superuser %}
+                    <th class="no-print">Ações</th>
+                    {% endif %}
+                </tr>
+            </thead>
             <tbody>
                 {% for e in Ele %}
                 <tr class="animate-in" style="animation-delay: 0.{{ forloop.counter }}s;">
@@ -54,7 +164,7 @@
                         <span class="price-tag">R$ {{ e.custo|floatformat:2 }}</span>
                     </td>
                     {% if user.is_superuser %}
-                    <td><a href="{% url 'deletarE' e.id %}" class="btn-delete">Excluir</a></td>
+                    <td class="no-print"><a href="{% url 'deletarE' e.id %}" class="btn-delete">Excluir</a></td>
                     {% endif %}
                 </tr>
                 {% endfor %}
@@ -67,53 +177,34 @@
         <a href="{% url 'CE' %}" style="color: var(--brand-pink); text-decoration: none; font-weight: bold;">+ Cadastrar Primeiro</a>
     </div>
     {% endif %}
-</div>
 
 <script>
 function sortTable(n) {
   var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
   table = document.querySelector(".custom-table");
+  if(!table) return;
   switching = true;
   dir = "asc"; 
-  
   while (switching) {
     switching = false;
     rows = table.rows;
-    
     for (i = 1; i < (rows.length - 1); i++) {
       shouldSwitch = false;
       x = rows[i].getElementsByTagName("TD")[n];
       y = rows[i + 1].getElementsByTagName("TD")[n];
-      
-      // Limpa caracteres especiais para comparar números (R$, W, etc)
       var xValue = x.innerText.replace(/[^\d,.-]/g, '').replace(',', '.');
       var yValue = y.innerText.replace(/[^\d,.-]/g, '').replace(',', '.');
-      
-      // Se não for número, usa o texto puro
       var cmpX = isNaN(parseFloat(xValue)) ? x.innerText.toLowerCase() : parseFloat(xValue);
       var cmpY = isNaN(parseFloat(yValue)) ? y.innerText.toLowerCase() : parseFloat(yValue);
-
-      if (dir == "asc") {
-        if (cmpX > cmpY) {
-          shouldSwitch = true;
-          break;
-        }
-      } else if (dir == "desc") {
-        if (cmpX < cmpY) {
-          shouldSwitch = true;
-          break;
-        }
-      }
+      if (dir == "asc") { if (cmpX > cmpY) { shouldSwitch = true; break; } } 
+      else if (dir == "desc") { if (cmpX < cmpY) { shouldSwitch = true; break; } }
     }
     if (shouldSwitch) {
       rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
       switching = true;
       switchcount ++;      
     } else {
-      if (switchcount == 0 && dir == "asc") {
-        dir = "desc";
-        switching = true;
-      }
+      if (switchcount == 0 && dir == "asc") { dir = "desc"; switching = true; }
     }
   }
 }

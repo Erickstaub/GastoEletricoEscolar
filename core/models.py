@@ -37,7 +37,7 @@ class Eletronicos(models.Model):
     quantidade = models.IntegerField()
     sala = models.ForeignKey(Salas, on_delete=models.CASCADE)
     horas = models.IntegerField()
-    dias = models.IntegerField(default=26)
+    dias = models.IntegerField()
 
     def __str__(self):
         return f"{self.nome} ({'Escola' if self.pertence_a_escola else 'Privado'})"

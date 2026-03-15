@@ -36,17 +36,17 @@ def CriarEletronico(request):
             
             # REGRA 2: Se o campo foi removido (user comum), garantimos que seja False
             if not request.user.is_superuser:
-             cat_sala, _ = Categorias.objects.get_or_create(nome="Sala de aula", IsSala=True)
+                cat_sala, _ = Categorias.objects.get_or_create(nome="Sala de aula", IsSala=True)
 
              # 2. Depois, criamos a sala vinculando-a à categoria que acabamos de garantir
-            sala_padrao, _ = Salas.objects.get_or_create(
-            nome="Sala 1", 
-            defaults={'categoria': cat_sala} # 'defaults' serve para preencher se precisar criar
-            )
-    
-            eletronico.sala = sala_padrao
-            eletronico.pertence_a_escola = False
-                
+                sala_padrao, _ = Salas.objects.get_or_create(
+                nome="Sala 1", 
+                defaults={'categoria': cat_sala} # 'defaults' serve para preencher se precisar criar
+                )
+        
+                eletronico.sala = sala_padrao
+                eletronico.pertence_a_escola = False
+                    
             eletronico.save()
             return redirect('menu')
     else:

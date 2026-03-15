@@ -1,48 +1,116 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}Menu{% endblock %}
+
+{% block title %}Menu | Consumo Energético{% endblock %}
+
 {% block extra_css %}
- <link rel="stylesheet" href="{% static 'core/menu.css' %}">
+<link rel="stylesheet" href="{% static 'core/menu.css' %}">
+<style>
+    /* CSS inline para ajustes finos de layout */
+    .home-grid-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        grid-template-rows: repeat(2, 220px);
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card-main { grid-row: span 2; }
+
+    .home-card {
+        position: relative;
+        border-radius: 20px;
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.1);
+        background-color: #1e1e26;
+    }
+
+    .home-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+    }
+
+    /* Overlay para garantir que o texto apareça sobre as imagens */
+    .card-bg-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.8) 100%);
+        z-index: 1;
+    }
+
+    .card-content { position: relative; z-index: 2; color: white; }
+    
+    .bg-gradient-red { background: linear-gradient(135deg, #ff0040, #b3002d); }
+    .bg-purple { background: linear-gradient(135deg, #9900ff, #6a00b0); }
+
+    /* Estilo para a imagem dentro do card principal */
+    .img-main-card {
+        position: absolute;
+        top: 0; right: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+        opacity: 0.3;
+        z-index: 0;
+    }
+</style>
 {% endblock %}
+
 {% block content %}
 <section class="home-hero animate-in">
-    <h1>Aprenda Sobre <br> Consumo Energetico</h1>
+    <div class="hero-container">
+        <h1 style="text-align: center; color: white; margin-bottom: 30px;">
+            Aprenda Sobre <br> <span style="color: #ffcc00;">Consumo Energético</span>
+        </h1>
+    </div>
 </section>
 
 <div class="home-grid-container">
     
-    <div class="home-card card-master animate-in delay-1" onclick="window.location.href='{% url 'home' %}'">
-        <div class="master-arrow-icon">→</div>
-        <h3>Tabela De Gastos</h3>
+    <div class="home-card card-main  animate-in delay-1" onclick="window.location.href='{% url 'home' %}'">
+        <img src="{% static 'core/foto1.png' %}" class="img-main-card">
+        <div class="card-content">
+      
+            <h3 style="font-weight: 800; font-size: 1.8rem;">Tabela De Gastos</h3>
+            <p>Gerencie e visualize seus custos mensais</p>
+        </div>
     </div>
 
-    <div class="home-card card-orange animate-in delay-2" onclick="window.location.href='{% url 'kwh' %}'">
-        <div class="home-card-plus">
-            <img src="https://img.icons8.com/material-outlined/24/ffffff/plus-math.png" alt="plus"/>
+    <div class="home-card animate-in delay-2" onclick="window.location.href='{% url 'kwh' %}'">
+        <img src="https://www.weg.net/solar/blog/wp-content/uploads/2023/03/qual-a-diferenca-entre-kw-kwh-e-kwp_-1.png" 
+             style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+        <div class="card-bg-overlay"></div>
+        <div class="card-content">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/info.png" alt="info"/>
+            <h5 style="font-weight: 700;">Entenda os cálculos</h5>
         </div>
-        <img src="https://www.weg.net/solar/blog/wp-content/uploads/2023/03/qual-a-diferenca-entre-kw-kwh-e-kwp_-1.png" class="card-bg">
-        <h5>Entenda os calculos</h5>
     </div>
 
-    <div class="home-card card-grey animate-in delay-3" onclick="window.location.href='{% url 'dicas' %}'">
-        <div class="home-card-plus">
-            <img src="https://img.icons8.com/material-outlined/24/ff0040/plus-math.png" alt="plus"/>
+    <div class="home-card animate-in delay-3" onclick="window.location.href='{% url 'dicas' %}'">
+        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=500&auto=format&fit=crop" 
+             style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+        <div class="card-bg-overlay"></div>
+        <div class="card-content">
+         
+            <h5 style="font-weight: 700;">Dicas de Economia</h5>
         </div>
-        <h5>Dicas</h5>
     </div>
 
-    <div class="home-card card-grey animate-in delay-4">
-        <div class="home-card-plus">
-            <img src="https://img.icons8.com/material-outlined/24/9900ff/plus-math.png" alt="plus"/>
+    <div class="home-card card-purple animate-in delay-4" style="grid-column: span 2;" onclick="window.location.href='{% url 'ST' %}'">
+        <div class="card-content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <div>
+                <h5 style="font-weight: 700; margin: 0;">Sua Tabela Personalizada</h5>
+                <p style="margin: 0; opacity: 0.8;">Acesse seus dados salvos rapidamente</p>
+            </div>
+            <img src="https://img.icons8.com/material-outlined/32/ffffff/database.png" alt="database"/>
         </div>
-        <h5>ESPACO LIVRE, teste pra ver se sobre pro git</h5>
-    </div>
-
-    <div class="home-card card-purple animate-in delay-5" onclick="window.location.href='{% url 'ST' %}'">
-        <div class="home-card-plus">
-            <img src="https://img.icons8.com/material-outlined/24/ffffff/plus-math.png" alt="plus"/>
-        </div>
-        <h5>Sua Tabela</h5>
     </div>
 
 </div>
