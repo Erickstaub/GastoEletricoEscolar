@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Impacto Ambiental{% endblock %}
+
+{% block extra_css %}   
+  <link rel="stylesheet" href="{% static 'core/kwh.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="form-hero text-center animate-in">
+    <h1 style="margin:0;">Consciência Ambiental</h1>
+    <p style="opacity: 0.8;">Preservar recursos hoje para garantir o amanhã</p>
+</section>
+
+<div class="info-container">
+    <div class="info-card animate-in delay-1">
+        <div class="info-icon">🌍</div>
+        <div class="info-text">
+            <h2>Redução da Pegada de Carbono</h2>
+            <p>Grande parte da energia elétrica é gerada por fontes que emitem gases poluentes. Economizar luz diminui a emissão de CO2 na atmosfera, combatendo o efeito estufa.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-2">
+        <div class="info-icon">💧</div>
+        <div class="info-text">
+            <h2>Proteção de Mananciais</h2>
+            <p>As hidrelétricas dependem do fluxo dos rios. O consumo consciente reduz a pressão sobre as bacias hidrográficas, ajudando a manter os níveis de água em períodos de seca.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-3">
+        <div class="info-icon">🌳</div>
+        <div class="info-text">
+            <h2>Preservação de Ecossistemas</h2>
+            <p>Menos demanda por energia significa menos necessidade de construir novas usinas ou linhas de transmissão, o que evita o desmatamento e a destruição de habitats naturais.</p>
+        </div>
+    </div>
+    
+    <div class="info-card animate-in delay-4">
+        <div class="info-icon">🐢</div>
+        <div class="info-text">
+            <h2>Conservação da Biodiversidade</h2>
+            <p>A redução do impacto ambiental direto nas águas e florestas protege a fauna e a flora local, garantindo que diversas espécies continuem existindo sem interferência humana.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.5s;">
+        <div class="info-icon">☁️</div>
+        <div class="info-text">
+            <h2>Qualidade do Ar</h2>
+            <p>Ao diminuir a necessidade de termelétricas (que queimam combustíveis fósseis), reduzimos a poluição do ar que respiramos, prevenindo doenças respiratórias na comunidade.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.6s;">
+        <div class="info-icon">♻️</div>
+        <div class="info-text">
+            <h2>Estímulo à Economia Circular</h2>
+            <p>O foco na eficiência energética incentiva o uso de produtos que duram mais e poluem menos, criando um ciclo de consumo muito mais responsável e menos descartável.</p>
+        </div>
+    </div>
+    
+    <div class="info-card animate-in" style="animation-delay: 0.7s;">
+        <div class="info-icon">☀️</div>
+        <div class="info-text">
+            <h2>Apoio às Energias Limpas</h2>
+            <p>A cultura do desperdício zero abre espaço para o investimento em matrizes energéticas renováveis, como a solar e a eólica, que são infinitamente menos agressivas ao meio ambiente.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.8s;">
+        <div class="info-icon">🌡️</div>
+        <div class="info-text">
+            <h2>Combate ao Aquecimento Local</h2>
+            <p>Equipamentos eletrônicos ligados sem necessidade geram calor. Em larga escala, a economia ajuda a manter as temperaturas mais amenas dentro do ambiente escolar e urbano.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.9s;">
+        <div class="info-icon">🌱</div>
+        <div class="info-text">
+            <h2>Educação para o Futuro</h2>
+            <p>Cada KWh economizado na escola serve como uma lição prática de respeito à natureza, formando cidadãos que entendem que os recursos naturais são finitos.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 1.0s;">
+        <div class="info-icon">🏔️</div>
+        <div class="info-text">
+            <h2>Herança para Próximas Gerações</h2>
+            <p>Nossas ações de hoje definem o planeta que os futuros alunos encontrarão. Economizar energia é um ato de solidariedade com quem ainda vai habitar a Terra.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;" class="animate-in" style="animation-delay: 1.1s;">
+        <a href="{% url 'menu' %}" class="btn-voltar">Voltar ao menu</a>
+    </div>
+</div>
+{% endblock %}

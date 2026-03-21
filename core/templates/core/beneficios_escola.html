@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Benefícios para a Escola{% endblock %}
+
+{% block extra_css %}   
+  <link rel="stylesheet" href="{% static 'core/kwh.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="form-hero text-center animate-in">
+    <h1 style="margin:0;">Escola Valorizada</h1>
+    <p style="opacity: 0.8;">Como a economia de energia transforma nossa instituição</p>
+</section>
+
+<div class="info-container">
+    <div class="info-card animate-in delay-1">
+        <div class="info-icon">📚</div>
+        <div class="info-text">
+            <h2>Novos Materiais Didáticos</h2>
+            <p>A verba economizada na conta de luz pode ser redirecionada para a compra de livros, mapas, kits de laboratório e materiais de artes para os alunos.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-2">
+        <div class="info-icon">🖥️</div>
+        <div class="info-text">
+            <h2>Modernização Tecnológica</h2>
+            <p>Menos gastos com desperdício permitem o investimento em novos computadores, tablets e projetores mais modernos para as salas de aula.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in delay-3">
+        <div class="info-icon">🛠️</div>
+        <div class="info-text">
+            <h2>Melhorias na Infraestrutura</h2>
+            <p>Recursos poupados podem financiar reformas essenciais, como pintura de salas, novos quadros e reparos em áreas de convivência e quadras esportivas.</p>
+        </div>
+    </div>
+    
+    <div class="info-card animate-in delay-4">
+        <div class="info-icon">🍎</div>
+        <div class="info-text">
+            <h2>Qualidade na Alimentação</h2>
+            <p>A economia gera fôlego no orçamento escolar, permitindo a manutenção de equipamentos de cozinha e a garantia de uma merenda sempre de qualidade.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.5s;">
+        <div class="info-icon">🌬️</div>
+        <div class="info-text">
+            <h2>Climatização Eficiente</h2>
+            <p>Ao economizar energia, a escola consegue investir na substituição de aparelhos antigos por modelos novos que resfriam melhor as salas com menor custo.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.6s;">
+        <div class="info-icon">🌿</div>
+        <div class="info-text">
+            <h2>Sustentabilidade na Prática</h2>
+            <p>O monitoramento transforma a escola em um modelo de consciência ambiental, ensinando aos alunos a importância de preservar recursos públicos e naturais.</p>
+        </div>
+    </div>
+    
+    <div class="info-card animate-in" style="animation-delay: 0.7s;">
+        <div class="info-icon">🔍</div>
+        <div class="info-text">
+            <h2>Manutenção de Equipamentos</h2>
+            <p>O acompanhamento do consumo evita que aparelhos trabalhem sobrecarregados, aumentando a vida útil de eletrônicos e evitando gastos com consertos caros.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.8s;">
+        <div class="info-icon">🎟️</div>
+        <div class="info-text">
+            <h2>Eventos e Projetos Culturais</h2>
+            <p>Com as finanças em dia, sobra mais verba para organizar feiras de ciências, gincanas, passeios pedagógicos e eventos para a comunidade escolar.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.9s;">
+        <div class="info-icon">🌐</div>
+        <div class="info-text">
+            <h2>Investimento em Conectividade</h2>
+            <p>A redução de custos operacionais permite que a escola invista em uma internet melhor e em roteadores de alta velocidade para professores e estudantes.</p>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 1.0s;">
+        <div class="info-icon">🏆</div>
+        <div class="info-text">
+            <h2>Destaque e Premiações</h2>
+            <p>Escolas que reduzem o consumo podem participar de programas de incentivo do governo e da RGE, ganhando prêmios e selos de eficiência energética.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;" class="animate-in" style="animation-delay: 1.1s;">
+        <a href="{% url 'menu' %}" class="btn-voltar">Voltar ao menu</a>
+    </div>
+</div>
+{% endblock %}

@@ -6,11 +6,10 @@
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'core/menu.css' %}">
 <style>
-    /* CSS inline para ajustes finos de layout */
     .home-grid-container {
         display: grid;
         grid-template-columns: 1.2fr 1fr 1fr;
-        grid-template-rows: repeat(2, 220px);
+        grid-template-rows: repeat(3, 220px); 
         gap: 20px;
         padding: 20px;
         max-width: 1200px;
@@ -19,6 +18,17 @@
 
     .card-main { grid-row: span 2; }
 
+    /* Responsividade para Celular */
+    @media (max-width: 768px) {
+        .home-grid-container {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+            gap: 15px;
+        }
+        .card-main { grid-row: span 1; min-height: 250px; }
+        .home-card { grid-column: span 1 !important; min-height: 180px; }
+    }
+
     .home-card {
         position: relative;
         border-radius: 20px;
@@ -26,7 +36,7 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
         cursor: pointer;
         overflow: hidden;
         border: 1px solid rgba(255,255,255,0.1);
@@ -38,7 +48,6 @@
         box-shadow: 0 12px 24px rgba(0,0,0,0.4);
     }
 
-    /* Overlay para garantir que o texto apareça sobre as imagens */
     .card-bg-overlay {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
@@ -48,18 +57,24 @@
 
     .card-content { position: relative; z-index: 2; color: white; }
     
-    .bg-gradient-red { background: linear-gradient(135deg, #ff0040, #b3002d); }
-    .bg-purple { background: linear-gradient(135deg, #9900ff, #6a00b0); }
+    .bg-blue { background: linear-gradient(135deg, #0052D4, #4364F7); }
+    .bg-green { background: linear-gradient(135deg, #1D976C, #93F9B9); }
+    .card-purple { background: linear-gradient(135deg, #8E2DE2, #4A00E0); }
 
-    /* Estilo para a imagem dentro do card principal */
-    .img-main-card {
+    .img-bg-card {
         position: absolute;
-        top: 0; right: 0;
-        width: 100%; height: 100%;
+        top: 0; left: 0; width: 100%; height: 100%;
         object-fit: cover;
-        opacity: 0.3;
+        opacity: 0.4;
         z-index: 0;
     }
+
+    /* Animações */
+    .animate-in { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .delay-1 { animation-delay: 0.1s; } .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; } .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; } .delay-6 { animation-delay: 0.6s; }
 </style>
 {% endblock %}
 
@@ -74,18 +89,15 @@
 
 <div class="home-grid-container">
     
-    <div class="home-card card-main  animate-in delay-1" onclick="window.location.href='{% url 'home' %}'">
-        <img src="{% static 'core/foto1.png' %}" class="img-main-card">
+    <div class="home-card card-main animate-in delay-1" onclick="window.location.href='{% url 'home' %}'">
+        <img src="{% static 'core/foto1.png' %}" class="img-bg-card">
         <div class="card-content">
-      
             <h3 style="font-weight: 800; font-size: 1.8rem;">Tabela De Gastos</h3>
-            <p>Gerencie e visualize seus custos mensais</p>
         </div>
     </div>
 
     <div class="home-card animate-in delay-2" onclick="window.location.href='{% url 'kwh' %}'">
-        <img src="https://www.weg.net/solar/blog/wp-content/uploads/2023/03/qual-a-diferenca-entre-kw-kwh-e-kwp_-1.png" 
-             style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400" class="img-bg-card">
         <div class="card-bg-overlay"></div>
         <div class="card-content">
             <img src="https://img.icons8.com/material-outlined/24/ffffff/info.png" alt="info"/>
@@ -94,22 +106,35 @@
     </div>
 
     <div class="home-card animate-in delay-3" onclick="window.location.href='{% url 'dicas' %}'">
-        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?q=80&w=500&auto=format&fit=crop" 
-             style="position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover;">
+        <img src="https://images.unsplash.com/photo-1493612276216-ee3925520721?auto=format&fit=crop&q=80&w=400" class="img-bg-card">
         <div class="card-bg-overlay"></div>
         <div class="card-content">
-         
             <h5 style="font-weight: 700;">Dicas de Economia</h5>
         </div>
     </div>
 
     <div class="home-card card-purple animate-in delay-4" style="grid-column: span 2;" onclick="window.location.href='{% url 'ST' %}'">
         <div class="card-content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-            <div>
-                <h5 style="font-weight: 700; margin: 0;">Sua Tabela Personalizada</h5>
-                <p style="margin: 0; opacity: 0.8;">Acesse seus dados salvos rapidamente</p>
-            </div>
+            <h5 style="font-weight: 700; margin: 0;">Sua Tabela Personalizada</h5>
             <img src="https://img.icons8.com/material-outlined/32/ffffff/database.png" alt="database"/>
+        </div>
+    </div>
+
+    <div class="home-card bg-blue animate-in delay-5" style="grid-column: span 2;" onclick="window.location.href='{% url 'BE' %}'">
+        <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=800" class="img-bg-card">
+        <div class="card-bg-overlay"></div>
+        <div class="card-content" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            <h5 style="font-weight: 700; margin: 0;">Benefícios para a Escola</h5>
+           
+        </div>
+    </div>
+
+    <div class="home-card bg-green animate-in delay-6" onclick="window.location.href='{% url "IM" %}'">
+        <img src="https://images.unsplash.com/photo-1473081556163-2a17de81fc97?auto=format&fit=crop&q=80&w=400" class="img-bg-card">
+        <div class="card-bg-overlay"></div>
+        <div class="card-content">
+            <img src="https://img.icons8.com/material-outlined/24/ffffff/leaf.png" alt="folha"/>
+            <h5 style="font-weight: 700; margin-top: 10px;">Impacto Ambiental</h5>
         </div>
     </div>
 

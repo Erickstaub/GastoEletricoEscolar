@@ -34,6 +34,8 @@
     --card-purple: #9900FF;
     --card-grey: #E0E0E0;
     --text-on-dark: #FFFFFF;
+    --card-green: #28a745;
+        --card-blue: #007bff;
 }
 
 body {
@@ -57,15 +59,16 @@ body {
     margin: 0;
     max-width: 600px;
 }
-
 .home-grid-container {
-    max-width: 1200px;
-    margin: 0px auto 0 auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px;
-}
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        /* Aumentado para 3 linhas de 220px */
+        grid-template-rows: repeat(3, 220px); 
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 
 .home-card {
     border-radius: 20px;
@@ -156,3 +159,22 @@ body {
 .card-grey h5 {
     color: #666;
 }
+.home-grid-container {
+        display: grid;
+        grid-template-columns: 1.2fr 1fr 1fr;
+        /* Alterado para 3 linhas de 220px para caber os novos botões */
+        grid-template-rows: repeat(3, 220px); 
+        gap: 20px;
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Cores novas seguindo seu padrão de variáveis */
+  
+.bg-blue { background: linear-gradient(135deg, #007bff, #0056b3); }
+    .bg-green { background: linear-gradient(135deg, #28a745, #1e7e34); }
+
+    /* Delays adicionais para a animação */
+    .delay-5 { animation-delay: 0.5s; }
+    .delay-6 { animation-delay: 0.6s; }

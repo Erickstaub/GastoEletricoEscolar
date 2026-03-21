@@ -1,7 +1,7 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
-{% block title %}Entenda o Consumo{% endblock %}
+{% block title %}Entenda os Cálculos{% endblock %}
  {% block extra_css %}   
   <link rel="stylesheet" href="{% static 'core/kwh.css' %}">
  {% endblock %}
@@ -9,7 +9,7 @@
 {% block content %}
 <section class="form-hero text-center animate-in">
     <h1 style="margin:0; font-size: 2.5rem;">Entenda os Cálculos</h1>
-    <p style="opacity: 0.8;">Saiba como transformamos Watts em Dinheiro no seu relatório</p>
+    <p style="opacity: 0.8;">Transformando a potência dos aparelhos em valores reais</p>
 </section>
 
 <div class="info-container">
@@ -18,30 +18,50 @@
         <div class="info-icon">⚡</div>
         <div class="info-text">
             <h2>O que é o kWh?</h2>
-            <p>O <strong>Quilowatt-hora (kWh)</strong> é a unidade que mede a energia consumida. Não confunda com a potência! Enquanto a potência é a "força" do aparelho, o kWh é essa força multiplicada pelo tempo que ele fica ligado.</p>
+            <p>O <strong>Quilowatt-hora (kWh)</strong> mede a energia consumida ao longo do tempo. É o resultado da potência do aparelho multiplicada pelas horas de uso.</p>
             <div class="formula">
-                Formula: (Watts × Horas × Dias) ÷ 1000 = kWh
+                Cálculo: (Watts × Horas × Dias) ÷ 1000 = kWh
             </div>
         </div>
     </div>
 
     <div class="info-card animate-in delay-2">
-        <div class="info-icon">🔌</div>
+        <div class="info-icon">🔢</div>
         <div class="info-text">
-            <h2>Potência (Watts)</h2>
-            <p>É a capacidade de trabalho de um equipamento. Um ar-condicionado tem muita potência (ex: 2000W), enquanto uma lâmpada LED tem pouca (ex: 9W). Quanto maior a potência, mais rápido o medidor de energia gira.</p>
+            <h2>Por que dividir por 1000?</h2>
+            <p>As distribuidoras cobram por <strong>Quilo</strong>watts (kW). Como "Quilo" significa mil, precisamos dividir a potência em Watts por 1000 para converter o valor corretamente.</p>
         </div>
     </div>
 
     <div class="info-card animate-in delay-3">
-        <div class="info-icon">💰</div>
+        <div class="info-icon">📝</div>
         <div class="info-text">
-            <h2>Como calculamos o R$?</h2>
-            <p>Pegamos o total de kWh consumido no mês e multiplicamos pela tarifa da distribuidora (em Santa Cruz usamos <strong>R$ 0,92</strong>)</p>
+            <h2>Exemplo na Prática</h2>
+            <p>Um Computador (200W) ligado 5h por dia durante 30 dias:</p>
+            <p style="font-weight: bold; margin-top: 5px;">(200 × 5 × 30) ÷ 1000 = 30 kWh no mês.</p>
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 30px;" class="animate-in delay-4">
+    <div class="info-card animate-in delay-4">
+        <div class="info-icon">💰</div>
+        <div class="info-text">
+            <h2>Custo em Reais (R$)</h2>
+            <p>Para saber o preço, multiplicamos o consumo mensal (kWh) pelo valor da tarifa da distribuidora local.</p>
+            <div class="formula" style="background: #e8f5e9; border-color: #2e7d32; color: #2e7d32;">
+                Exemplo: 30 kWh × R$ 0,92 = R$ 27,60 mensais
+            </div>
+        </div>
+    </div>
+
+    <div class="info-card animate-in" style="animation-delay: 0.5s;">
+        <div class="info-icon">🚩</div>
+        <div class="info-text">
+            <h2>Bandeiras Tarifárias</h2>
+            <p>O valor pode variar conforme a "cor da bandeira" (Verde, Amarela ou Vermelha). Elas indicam se a produção de energia está mais cara devido à falta de chuvas.</p>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 30px;" class="animate-in" style="animation-delay: 0.6s;">
         <a href="{% url 'menu' %}" class="btn-voltar">Voltar ao menu</a>
     </div>
 </div>

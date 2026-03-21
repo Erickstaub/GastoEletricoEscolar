@@ -156,3 +156,9 @@ def Suatabela(request):
   ele = Eletronicos.objects.filter(pertence_a_escola=False, dono=request.user)
   total_valor = sum(e.custo for e in ele)
   return render(request, 'core/suatabela.html',{"Ele":ele, 'total_custo': total_valor})
+@login_required
+def beneficios(request):
+    return render(request, 'core/beneficios_escola.html')
+@login_required
+def impacto(request):
+    return render(request, 'core/impacto.html')
