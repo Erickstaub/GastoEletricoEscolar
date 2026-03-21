@@ -1,0 +1,55 @@
+{% extends "core/base.html" %}
+{% load static %}   
+
+{% block title %}Consumo de Energia{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Dashboard de Consumo</h2>
+    
+    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 300px; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #ddd;">
+            <h3 class="text-center">Consumo por Sala (kWh)</h3>
+            <canvas id="barChart"></canvas>
+        </div>
+        <div style="flex: 0.6; min-width: 250px; background: #fff; padding: 20px; border-radius: 8px; border: 1px solid #ddd;">
+            <h3 class="text-center">Origem/Categoria</h3>
+            <canvas id="pieChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctxBar = document.getElementById('barChart');
+        if (ctxBar) {
+            new Chart(ctxBar, {
+                type: 'bar',
+                data: {
+                    labels: {{ labels_salas|safe|default:"[]" }},
+                    datasets: [{
+                        label: 'Consumo Total (kWh)',
+                        data: {{ valores_kwh|safe|default:"[]" }},
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                    }]
+                }
+            });
+        }
+
+        const ctxPie = document.getElementById('pieChart');
+        if (ctxPie) {
+            new Chart(ctxPie, {
+                type: 'pie',
+                data: {
+                    labels: {{ labels_tipo|safe|default:"[]" }},
+                    datasets: [{
+                        data: {{ valores_tipo|safe|default:"[]" }},
+                        backgroundColor: ['#2ecc71', '#e74c3c', '#f1c40f', '#9b59b6']
+                    }]
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

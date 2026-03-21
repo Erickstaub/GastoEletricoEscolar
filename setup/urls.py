@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 from django.urls import path
-from core.views import Suatabela,Home,Base, CriarEletronico, CriarCategoria,CriarSala, Menu,De, Cadastro, Kwh,Dicas
+from core.views import dashboard,Suatabela,Home,Base, CriarEletronico, CriarCategoria,CriarSala, Menu,De, Cadastro, Kwh,Dicas
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
@@ -18,5 +18,6 @@ urlpatterns = [
     path("cadastro", Cadastro, name="cadastro"),
     path("kwh", Kwh, name="kwh"),
     path("dicas",Dicas, name="dicas"),
-    path("suatabela",Suatabela,name="ST")
+    path("suatabela",Suatabela,name="ST"),
+    path("grafico", dashboard, name='DS')
 ]

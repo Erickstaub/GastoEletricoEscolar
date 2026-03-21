@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required,user_passes_test
 from core.models import Eletronicos,Categorias,Salas
 from .form import SalasForm, CategoriaForm,EletronicosForm
-from django.db.models import Sum
+from django.db.models import Sum, F
 # Create your views here.
 def e_admin(user):
     return user.is_superuser
@@ -16,7 +16,44 @@ def Base(request):
         return redirect('menu')  
     else:
         return redirect('login')
+    
 
+@login_required
+def dashboard(request):
+    # 1. Filtramos o queryset para pegar APENAS os da escola
+    queryset = Eletronicos.objects.filter(pertence_a_escola=True)
+    
+    # 2. Consumo por Sala (Gráfico de Barras) - Agora apenas com itens da escola
+    dados_salas = (
+        queryset.values('sala__nome')
+        .annotate(
+            total_kwh=Sum(F('potencia') * F('horas') * F('dias') * F('quantidade') / 1000.0)
+        )
+        .order_by('-total_kwh')
+    )
+
+    labels_salas = [item['sala__nome'] for item in dados_salas]
+    valores_kwh = [float(item['total_kwh']) for item in dados_salas]
+
+    # 3. Distribuição por Categoria (Sugestão de substituição para o gráfico de pizza)
+    # Como agora tudo é "Escola", o gráfico de pizza anterior ficaria com uma cor só.
+    # É mais interessante mostrar a divisão por CATEGORIA dentro da escola.
+    dados_categoria = (
+        queryset.values('categoria__nome')
+        .annotate(total=Sum(F('potencia') * F('horas') * F('dias') * F('quantidade') / 1000.0))
+    )
+    
+    labels_categoria = [item['categoria__nome'] for item in dados_categoria]
+    valores_categoria = [float(item['total']) for item in dados_categoria]
+
+    context = {
+        'labels_salas': labels_salas,
+        'valores_kwh': valores_kwh,
+        'labels_tipo': labels_categoria,  # Reutilizando o nome da variável no template
+        'valores_tipo': valores_categoria,
+    }
+    
+    return render(request, 'core/dashboard.html', context)
 @login_required
 def Home(request):
     ele = Eletronicos.objects.filter(pertence_a_escola=True)

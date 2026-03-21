@@ -119,6 +119,10 @@
         <h2 style="margin: 0; color: #333;">Eletrônicos na escola</h2>
         
         <div style="display: flex; gap: 10px;">
+            <a href="{% url 'DS' %}" class="no-print" style="background: #2d2d3a; color: white; border: none; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+             <img src="https://img.icons8.com/material-outlined/20/ffffff/dashboard-layout.png"/>
+        Graficos
+            </a>
             <button onclick="window.print()" class="no-print" style="background: #2d2d3a; color: white; border: none; padding: 8px 18px; border-radius: 50px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
                 <img src="https://img.icons8.com/material-outlined/20/ffffff/print.png"/>
                 Imprimir 
@@ -180,33 +184,44 @@
 
 <script>
 function sortTable(n) {
-  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-  table = document.querySelector(".custom-table");
-  if(!table) return;
-  switching = true;
-  dir = "asc"; 
-  while (switching) {
-    switching = false;
-    rows = table.rows;
-    for (i = 1; i < (rows.length - 1); i++) {
-      shouldSwitch = false;
-      x = rows[i].getElementsByTagName("TD")[n];
-      y = rows[i + 1].getElementsByTagName("TD")[n];
-      var xValue = x.innerText.replace(/[^\d,.-]/g, '').replace(',', '.');
-      var yValue = y.innerText.replace(/[^\d,.-]/g, '').replace(',', '.');
-      var cmpX = isNaN(parseFloat(xValue)) ? x.innerText.toLowerCase() : parseFloat(xValue);
-      var cmpY = isNaN(parseFloat(yValue)) ? y.innerText.toLowerCase() : parseFloat(yValue);
-      if (dir == "asc") { if (cmpX > cmpY) { shouldSwitch = true; break; } } 
-      else if (dir == "desc") { if (cmpX < cmpY) { shouldSwitch = true; break; } }
-    }
-    if (shouldSwitch) {
-      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-      switching = true;
-      switchcount ++;      
-    } else {
-      if (switchcount == 0 && dir == "asc") { dir = "desc"; switching = true; }
-    }
-  }
+    const table = document.querySelector(".custom-table");
+    const tbody = table.querySelector("tbody");
+    const rows = Array.from(tbody.querySelectorAll("tr"));
+    const th = table.querySelectorAll("th")[n];
+    
+    // Determina a direção (ascendente ou descendente)
+    const isAscending = th.classList.contains("sort-asc");
+    
+    // Remove classes de ordenação de todos os cabeçalhos
+    table.querySelectorAll("th").forEach(header => {
+        header.classList.remove("sort-asc", "sort-desc");
+    });
+
+    // Função para limpar e converter valores para comparação
+    const getCellValue = (row, index) => {
+        const cell = row.children[index].innerText;
+        // Remove símbolos de moeda, unidade W e converte vírgula em ponto
+        const cleanValue = cell.replace(/[R$\sWk]/g, '').replace(',', '.');
+        return isNaN(parseFloat(cleanValue)) ? cell.toLowerCase() : parseFloat(cleanValue);
+    };
+
+    // Ordenação rápida na memória (não no DOM)
+    rows.sort((rowA, rowB) => {
+        const valA = getCellValue(rowA, n);
+        const valB = getCellValue(rowB, n);
+
+        if (valA > valB) return isAscending ? -1 : 1;
+        if (valA < valB) return isAscending ? 1 : -1;
+        return 0;
+    });
+
+    // Atualiza a classe de direção
+    th.classList.add(isAscending ? "sort-desc" : "sort-asc");
+
+    // Reinsere as linhas ordenadas de uma só vez (Fragmento de documento para performance)
+    const fragment = document.createDocumentFragment();
+    rows.forEach(row => fragment.appendChild(row));
+    tbody.appendChild(fragment);
 }
 </script>
 {% endblock %}
